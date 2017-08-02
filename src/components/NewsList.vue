@@ -1,5 +1,11 @@
 <template>
-  <div class="hello">
+  <div>
+    <el-carousel height="300px">
+      <el-carousel-item v-for="item in banner" :key="item.id">
+        <img :src="item.image"/>
+      </el-carousel-item>
+    </el-carousel>
+
     <div v-for="item in datas">
       <router-link :to="`detail/${item.id}`">
         <div>
@@ -18,6 +24,7 @@ export default {
   name: 'news-list',
   data () {
     return {
+      banner: [],
       datas: []
     }
   },
@@ -32,6 +39,7 @@ export default {
       Axios.get('/zhihu/api/4/news/latest')
         .then(response => {
           console.log(response.data)
+          this.banner = response.data.top_stories
           this.datas = response.data.stories
         })
     }
@@ -57,5 +65,21 @@ li {
 
 a {
   color: #42b983;
+}
+
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
 }
 </style>
