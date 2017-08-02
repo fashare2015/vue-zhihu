@@ -1,9 +1,11 @@
 <template>
   <div class="hello">
     <div v-for="item in datas">
-      <router-link to="/detail/1747159">
-        <img :src="item.images[0]"/>
-        <p>{{item.title}}</p>
+      <router-link :to="`detail/${item.id}`">
+        <div>
+          <img :src="item.images[0]"/>
+          <p>{{item.title}}</p>
+        </div>
       </router-link>
     </div>
   </div>
