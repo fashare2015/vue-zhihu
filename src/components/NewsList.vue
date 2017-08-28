@@ -1,10 +1,12 @@
 <template>
   <div>
-    <el-carousel height="20rem">
-      <el-carousel-item v-for="item in banner" :key="item.id">
-        <img :src="item.image"/>
-      </el-carousel-item>
-    </el-carousel>
+    <mt-swipe :auto="3000">
+      <mt-swipe-item v-for="item in banner" :key="item.id">
+        <router-link :to="`detail/${item.id}`" >
+          <img :src="item.image"/>
+        </router-link>
+      </mt-swipe-item>
+    </mt-swipe>
 
     <div v-for="item in datas">
       <router-link :to="`detail/${item.id}`">
@@ -49,9 +51,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .el-carousel__item{
+  .mint-swipe{
     width:100%;
-    height:100%;
+    height:20rem;
 
     img {
       width: 100%;
@@ -60,6 +62,8 @@ export default {
   }
 
   .news-item {
+    display: flex;
+    flex-flow:row;
     background-color: #ebeef5;
     width: auto;
     height: 7rem;
@@ -67,17 +71,17 @@ export default {
     padding: 1rem;
 
     img {
+      flex: 0 0 7rem;
       width: 7rem;
       height: 7rem;
-      position: absolute;
-      left: 0;
-      margin-left: 1rem;
     }
 
     p {
+      flex: 1 0 0;
       font-size: 1.6rem;
       color: black;
-      margin-left: 8rem;
+
+      margin-left: 1rem;
     }
   }
 </style>

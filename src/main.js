@@ -3,11 +3,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import Element from 'element-ui'
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.min.css'
 
 Vue.config.productionTip = false
 
-Vue.use(Element)
+Vue.use(MintUI)
 
 /* eslint-disable no-new */
 new Vue({

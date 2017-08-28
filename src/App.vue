@@ -24,5 +24,6 @@ export default {
   a {
     color: inherit;
     text-decoration: none;
+    display: block; /* ??? */
   }
 </style>
