@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-carousel height="300px">
+    <el-carousel height="20rem">
       <el-carousel-item v-for="item in banner" :key="item.id">
         <img :src="item.image"/>
       </el-carousel-item>
@@ -8,7 +8,7 @@
 
     <div v-for="item in datas">
       <router-link :to="`detail/${item.id}`">
-        <div>
+        <div class="news-item">
           <img :src="item.images[0]"/>
           <p>{{item.title}}</p>
         </div>
@@ -48,38 +48,36 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+<style scoped lang="scss">
+  .el-carousel__item{
+    width:100%;
+    height:100%;
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  .news-item {
+    background-color: #ebeef5;
+    width: auto;
+    height: 7rem;
+    margin-top: 1rem;
+    padding: 1rem;
 
-a {
-  color: #42b983;
-}
+    img {
+      width: 7rem;
+      height: 7rem;
+      position: absolute;
+      left: 0;
+      margin-left: 1rem;
+    }
 
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 150px;
-  margin: 0;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n+1) {
-  background-color: #d3dce6;
-}
+    p {
+      font-size: 1.6rem;
+      color: black;
+      margin-left: 8rem;
+    }
+  }
 </style>
