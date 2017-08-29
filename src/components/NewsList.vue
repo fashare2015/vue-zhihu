@@ -8,13 +8,17 @@
       </mt-swipe-item>
     </mt-swipe>
 
-    <div v-for="item in datas">
-      <router-link :to="`detail/${item.id}`">
-        <div class="news-item">
-          <img :src="item.images[0]"/>
-          <p>{{item.title}}</p>
-        </div>
-      </router-link>
+    <div v-infinite-scroll="this.loadMore"
+         infinite-scroll-disabled="loading"
+         infinite-scroll-distance="10">
+      <div v-for="item in datas">
+        <router-link :to="`detail/${item.id}`">
+          <div class="news-item">
+            <img :src="item.images[0]"/>
+            <p>{{item.title}}</p>
+          </div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +31,9 @@ export default {
   data () {
     return {
       banner: [],
-      datas: []
+      datas: [],
+      curDate: null,
+      loading: false
     }
   },
 
@@ -43,7 +49,24 @@ export default {
           console.log(response.data)
           this.banner = response.data.top_stories
           this.datas = response.data.stories
+          this.curDate = response.data.date
         })
+    },
+    loadMore () {
+      console.log(`loadMore: ${this.curDate}`)
+      const date = parseInt(this.curDate)
+
+      if (date && !this.loading) {
+        this.loading = true
+        Axios.get(`/zhihu//api/4/news/before/${date}`)
+          .then(response => {
+            console.log(response.data)
+            this.datas = this.datas.concat(response.data.stories)
+            this.curDate = response.data.date
+
+            this.loading = false
+          })
+      }
     }
   }
 }
